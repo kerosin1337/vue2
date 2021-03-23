@@ -5,12 +5,13 @@
       <input type="text" placeholder="Surname name" v-model="sur" required>
       <input type="tel" placeholder="89999999999" v-model="tel" pattern="[0-9]{11}" required>
       <input type="password" v-model="pass" required>
-      <input type="submit" @click="reg">
+      <input type="submit" @click="reg()" >
     </form>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 export default {
   name: 'Reg',
   data () {
@@ -35,11 +36,21 @@ export default {
           password: this.pass
         })
       }
-
-      const response = await fetch('http://u104386.test-handyhost.ru/api/signup', requestOptions)
-      // eslint-disable-next-line no-unused-vars
-      const data = response.json()
-      console.log(data)
+      fetch(localStorage.url, requestOptions)
+        .then(async response => {
+          const data = await response.json()
+          if (response.status === 201) {
+            alert('Регестрация прошла успешно')
+            console.log(data.id, response)
+            localStorage.setItem('log', this.tel)
+            localStorage.setItem('pass', this.pass)
+          } else {
+            console.log(data)
+            const pass = data.password || ' '
+            console.log(pass)
+            alert(data.phone + ' ' + pass)
+          }
+        })
     }
   }
 }

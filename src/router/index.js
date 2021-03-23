@@ -22,11 +22,25 @@ const routes = [
     path: '/reg',
     name: 'Reg',
     component: () => import('../views/Reg.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: () => import('../views/Logout.vue')
   }
 ]
 
 const router = new VueRouter({
   routes
+  // eslint-disable-next-line no-use-before-define
 })
+
+// eslint-disable-next-line no-unused-vars
+localStorage.setItem('url', 'http://u104386.test-handyhost.ru/api/')
 
 export default router
