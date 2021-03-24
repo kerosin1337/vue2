@@ -32,6 +32,21 @@ const routes = [
     path: '/logout',
     name: 'Logout',
     component: () => import('../views/Logout.vue')
+  },
+  {
+    path: '/upload',
+    name: 'Upload',
+    component: () => import('../views/Upload.vue')
+  },
+  {
+    path: '/update/:id',
+    name: 'Update',
+    component: () => import('../views/Update.vue')
+  },
+  {
+    path: '/get',
+    name: 'Get',
+    component: () => import('../views/Get.vue')
   }
 ]
 

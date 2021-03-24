@@ -36,7 +36,7 @@ export default {
           password: this.pass
         })
       }
-      fetch(localStorage.url, requestOptions)
+      fetch(localStorage.url + 'signup', requestOptions)
         .then(async response => {
           const data = await response.json()
           if (response.status === 201) {

@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import qwe from './Reg.vue'
 export default {
   name: 'Login',
   data () {
@@ -27,7 +26,7 @@ export default {
           password: this.pass
         })
       }
-      fetch(localStorage.url, requestOptions)
+      fetch(localStorage.url + 'login', requestOptions)
         .then(async response => {
           const data = await response.json()
           if (response.status === 200) {
@@ -47,7 +46,6 @@ export default {
     }
   }
 }
-console.log(qwe)
 </script>
 
 <style scoped>

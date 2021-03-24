@@ -24,6 +24,7 @@ export default {
         if (response.status === 200) {
           alert('Успешный выход')
           localStorage.token = ''
+          localStorage.password = ''
         } else if (response.status === 403) {
           alert('You need authorization')
         }
