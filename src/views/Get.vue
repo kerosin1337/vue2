@@ -1,47 +1,50 @@
 <template>
-  <div class="row justify-content-sm-between">
-    <div class="col-md-5 m-4 p-0" v-for="image in images" :key="image.id">
-      <div class="card shadow-lg">
-        <img :src="image.url" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ image.name || 'untitled' }}</h5>
-          <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Редактировать
-          </button>
-          <button class="btn btn-primary m-1" @click="getOne(image.id)" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-            Посмотреть
-          </button>
+  <div class="container shadow-lg p-0 bg-white rounded mb-3">
+    <div class="row justify-content-sm-between">
+      <div class="col-md-5 m-4 p-0" v-for="image in images" :key="image.id">
+        <div class="card shadow-lg">
+          <img :src="image.url" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ image.name || 'untitled' }}</h5>
+            <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Редактировать
+            </button>
+            <button class="btn btn-primary m-1" @click="getOne(image.id)" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2">
+              Посмотреть
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Редактирование</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label for="name" class="form-label">Название</label>
-                <input type="text" class="form-control" id="name" placeholder="untitled">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактирование</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="mb-3">
-                <label for="file" class="form-label">Изображение</label>
-                <input class="form-control" type="file" id="file" accept="image/*">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Название</label>
+                  <input type="text" class="form-control" id="name" placeholder="untitled" v-model="name">
+                </div>
+                <div class="mb-3">
+                  <label for="file" class="form-label">Изображение</label>
+                  <input class="form-control" type="file" id="file" accept="image/*">
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" @click="del(image.id)">Удалить</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-              <button type="button" class="btn btn-primary" @click="updatePhoto(image.id)">Обновить</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" @click="del(image.id)">Удалить</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" @click="updatePhoto(image.id)">Обновить</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <img :src="imageOne" alt="">
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <img :src="imageOne" alt="">
+            </div>
           </div>
         </div>
       </div>
@@ -56,7 +59,8 @@ export default {
     return {
       token: localStorage.token,
       images: [],
-      imageOne: ''
+      imageOne: '',
+      name: ''
     }
   },
   created () {
@@ -94,7 +98,9 @@ export default {
       const fileField = document.getElementById('file')
       formData.append('_method', 'patch')
       formData.append('name', this.name || 'untitled')
-      formData.append('photo', await getUrl(fileField.files[0]))
+      if (fileField.files[0]) {
+        formData.append('photo', await getUrl(fileField.files[0]))
+      }
       const requestOptions = {
         method: 'POST',
         headers: {
