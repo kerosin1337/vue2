@@ -13,21 +13,23 @@
               </svg>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="name" class="form-label">Название</label>
-              <input type="text" class="form-control" id="name" placeholder="untitled" v-model="name">
+          <form action="" @submit.prevent="updatePhoto(image.id)">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="name" class="form-label">Название</label>
+                <input type="text" class="form-control" id="name" placeholder="untitled" v-model="name">
+              </div>
+              <div class="mb-3">
+                <label for="fileUpdate" class="form-label">Изображение</label>
+                <input class="form-control" type="file" id="fileUpdate" accept="image/*">
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="file" class="form-label">Изображение</label>
-              <input class="form-control" type="file" id="file" accept="image/*">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" @click="del(image.id)">Удалить</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+              <button type="submit" class="btn btn-primary">Обновить</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" @click="del(image.id)">Удалить</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-            <button type="button" class="btn btn-primary" @click="updatePhoto(image.id)">Обновить</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -70,12 +72,13 @@ export default {
         }
       }
       var formData = new FormData()
-      const fileField = document.getElementById('file')
+      const fileField = document.getElementById('fileUpdate')
       formData.append('_method', 'patch')
       formData.append('name', this.name || 'untitled')
       if (fileField.files[0]) {
         formData.append('photo', await getUrl(fileField.files[0]))
       }
+      console.log(formData)
       const requestOptions = {
         method: 'POST',
         headers: {

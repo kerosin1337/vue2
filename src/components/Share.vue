@@ -78,7 +78,7 @@ export default {
         .then(async response => {
           const data = await response.json()
           console.log(data, response)
-          console.log()
+          location.reload()
         })
     }
   }
