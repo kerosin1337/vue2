@@ -6,7 +6,7 @@
   <!--      <input type="password" v-model="pass" required>-->
   <!--      <input type="submit" >-->
   <!--    </form>-->
-  <div class="container w-50 shadow-lg p-0 bg-white rounded mb-3">
+  <div class="container w-25 shadow-lg p-0 bg-white rounded mb-3">
     <form class="p-2" @submit.prevent="reg">
       <div class="mb-3">
         <label for="exampleInputFirst" class="form-label">FirstName</label>
@@ -64,6 +64,7 @@ export default {
             localStorage.setItem('myName', this.first)
             localStorage.setItem('log', this.tel)
             localStorage.setItem('pass', this.pass)
+            window.location = ''
           } else {
             console.log(data)
             const pass = data.password || ' '

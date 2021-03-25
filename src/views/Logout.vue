@@ -22,7 +22,7 @@ export default {
     fetch(localStorage.url + 'logout', requestOptions)
       .then(async response => {
         if (response.status === 200) {
-          alert('Успешный выход')
+          window.location = '#/login'
           localStorage.token = ''
           localStorage.password = ''
         } else if (response.status === 403) {

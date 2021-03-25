@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-xl navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{myName}}</a>
+      <a class="navbar-brand" href="#">Kerov</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,6 +22,8 @@
 <!--          </li>-->
         </ul>
       </div>
+      <router-link to="/login" class="btn btn-facebook" v-if="token === ''">Авторизоваться</router-link>
+      <router-link to="/logout" class="btn btn-facebook" v-else>Выход</router-link>
     </div>
     <Upload/>
   </nav>
@@ -36,7 +38,8 @@ export default {
   },
   data () {
     return {
-      myName: localStorage.myName
+      myName: localStorage.myName,
+      token: localStorage.token
     }
   }
 }

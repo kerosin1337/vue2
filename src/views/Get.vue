@@ -1,15 +1,15 @@
 <template>
   <div class="container-fluid shadow-lg p-0 bg-white rounded mb-3">
     <Nav/>
-    <div class="row justify-content-between container-fluid">
+    <div class="row justify-content-between container-fluid" v-if="images.message !== 'You need authorization'">
       <div class="col-md-5 m-4" v-for="image in images" :key="image.id">
-        <div class="card shadow-lg">
+        <div class="card shadow-lg" >
           <img :src="image.url" class="card-img-top" alt="...">
           <div class="card-img-overlay">
             <button class="btn btn-secondary p-2" data-bs-toggle="modal" data-bs-target="#share">
               <i class="bi bi-share-fill"></i>
             </button>
-            <Share :image-id="image.id"/>
+            <Share  :image-id="image"/>
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ image.name || 'untitled' }}</h5>

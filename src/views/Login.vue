@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-50 shadow-lg p-0 bg-white rounded mb-3">
+  <div class="container w-25 shadow-lg p-0 bg-white rounded mb-3">
     <form action="" class="p-2" @submit.prevent="login">
       <div class="mb-3">
         <label for="Login" class="form-label">Phone</label>
@@ -10,7 +10,10 @@
         <label for="Pass" class="form-label">Password</label>
         <input type="password" v-model="pass" id="Pass" class="form-control" required>
       </div>
-      <input type="submit" class="btn btn-primary" value="Авторизоваться">
+      <div>
+        <input type="submit" class="btn btn-primary" value="Авторизоваться">
+        <router-link to="/reg" class="text-blue">Нет аккаунта?</router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -22,7 +25,7 @@ export default {
     return {
       click: false,
       tel: localStorage.log,
-      pass: localStorage.pass
+      pass: ''
     }
   },
   methods: {
@@ -39,12 +42,12 @@ export default {
         .then(async response => {
           const data = await response.json()
           if (response.status === 200) {
-            alert('Успешная авторизация')
             console.log(data, response)
             localStorage.setItem('token', data.token)
             localStorage.setItem('myName', this.first)
             localStorage.setItem('log', this.tel)
             localStorage.setItem('pass', this.pass)
+            window.location = ''
           } else if (response.status === 422) {
             console.log(data)
             const pass = data.password || ' '
