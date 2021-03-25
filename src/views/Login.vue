@@ -1,9 +1,18 @@
 <template>
-  <form action="">
-    <input type="tel" placeholder="89999999999" v-model="tel" pattern="[0-9]{11}">
-    <input type="password" v-model="pass">
-    <input type="submit" @click="login">
-  </form>
+  <div class="container w-50 shadow-lg p-0 bg-white rounded mb-3">
+    <form action="" class="p-2" @submit.prevent="login">
+      <div class="mb-3">
+        <label for="Login" class="form-label">Phone</label>
+        <input type="tel" placeholder="89999999999" v-model="tel" pattern="[0-9]{11}" class="form-control" id="Login"
+               required>
+      </div>
+      <div class="mb-3">
+        <label for="Pass" class="form-label">Password</label>
+        <input type="password" v-model="pass" id="Pass" class="form-control" required>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Авторизоваться">
+    </form>
+  </div>
 </template>
 
 <script>
@@ -31,9 +40,11 @@ export default {
           const data = await response.json()
           if (response.status === 200) {
             alert('Успешная авторизация')
-            console.log(data.token)
+            console.log(data, response)
             localStorage.setItem('token', data.token)
-            console.log(localStorage.token)
+            localStorage.setItem('myName', this.first)
+            localStorage.setItem('log', this.tel)
+            localStorage.setItem('pass', this.pass)
           } else if (response.status === 422) {
             console.log(data)
             const pass = data.password || ' '

@@ -20,7 +20,7 @@
         <label for="exampleInputTel" class="form-label">Phone</label>
         <input type="tel" class="form-control" id="exampleInputTel" v-model="tel" placeholder="9-(999)-999-99-99"
                required pattern="[0-9]{11}">
-      </div>{{tel}}
+      </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" v-model="pass" required>
@@ -61,6 +61,7 @@ export default {
           if (response.status === 201) {
             alert('Регестрация прошла успешно')
             console.log(data.id, response)
+            localStorage.setItem('myName', this.first)
             localStorage.setItem('log', this.tel)
             localStorage.setItem('pass', this.pass)
           } else {

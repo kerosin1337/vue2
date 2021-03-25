@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,7 +35,7 @@ const routes = [
   {
     path: '/upload',
     name: 'Upload',
-    component: () => import('../views/Upload.vue')
+    component: () => import('../components/Upload.vue')
   },
   {
     path: '/update/:id',
@@ -57,10 +56,8 @@ const routes = [
 
 const router = new VueRouter({
   routes
-  // eslint-disable-next-line no-use-before-define
 })
 
-// eslint-disable-next-line no-unused-vars
 localStorage.setItem('url', 'http://u104386.test-handyhost.ru/api/')
 
 export default router
